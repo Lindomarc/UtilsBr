@@ -4,7 +4,7 @@ namespace Lindomarc\UtilsBr;
 
 use Exception;
 
-class Utils
+class UtilsBr
 {
     /**
      * Destaca uma palavra em um texto
@@ -221,6 +221,23 @@ class Utils
 
         return $simbolo . ' ' . number_format($valor, $decimal, ',', '.');
     }
+    
+    /*
+     * Converter valores numericos entre br <=> us
+     * 
+     * */
+	
+	public function fixNumericDb($value, $tipo='us', $casas = 2){
+    	if (!!$value) {
+		    if($tipo=='us'){
+			    $value = str_replace('.', '', $value);
+			    $value = str_replace(',', '.', $value);
+		    }else{
+			    $value = number_format($value,$casas,',','.');
+		    }   
+    	}
+		return $value;
+	}
 
     /**
      * Retira formatação de valor monetário
