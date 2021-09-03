@@ -222,20 +222,21 @@ class UtilsBr
         return $simbolo . ' ' . number_format($valor, $decimal, ',', '.');
     }
     
-    /*
-     * Converter valores numericos entre br <=> us
+    /**
+     * Converter valores numericos  br <=> us
      * 
+     * @param any $value Numerico BR, float para valor US
+     * @param  
+     *  
      * */
 	
-	public function fixNumericDb($value, $tipo='us', $casas = 2){
-    	if (!!$value) {
-		    if($tipo=='us'){
-			    $value = str_replace('.', '', $value);
-			    $value = str_replace(',', '.', $value);
-		    }else{
-			    $value = number_format($value,$casas,',','.');
-		    }   
-    	}
+	public static function fixNumericDb(&$value, $decimal = 2){
+		if (!!$value && is_numeric($value)) {
+			$value = number_format($value,$casas,',','.');
+		}else{
+			$value = str_replace('.', '', $value);
+			$value = floatval(str_replace(',', '.', $value));
+		}
 		return $value;
 	}
 
